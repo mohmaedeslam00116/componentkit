@@ -77,17 +77,17 @@ export function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="block rounded-md px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="block rounded-md px-3 py-4 min-h-[44px] flex items-center text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
               onClick={() => setMobileOpen(false)}
             >
               {link.label}
             </a>
           ))}
-          <div className="flex items-center gap-2 pt-2">
+          <div className="flex items-center gap-3 pt-2">
             <ThemeToggle />
             <a
               href="#get-started"
-              className="flex-1 rounded-lg bg-primary px-4 py-2 text-center text-sm font-medium text-white transition-colors hover:bg-primary-hover"
+              className="flex-1 rounded-lg bg-primary px-4 py-3 min-h-[44px] flex items-center justify-center text-sm font-medium text-white transition-colors hover:bg-primary-hover"
               onClick={() => setMobileOpen(false)}
             >
               Get Started
