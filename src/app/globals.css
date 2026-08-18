@@ -1,26 +1,180 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* @shadowskit/ui design tokens — mapped from --ck-* variables */
+  --color-background: var(--ck-background);
+  --color-foreground: var(--ck-foreground);
+  --color-muted: var(--ck-muted);
+  --color-muted-foreground: var(--ck-muted-foreground);
+  --color-border: var(--ck-border);
+  --color-primary: var(--ck-primary);
+  --color-primary-hover: var(--ck-primary-hover);
+  --color-primary-light: var(--ck-primary-light);
+  --color-surface: var(--ck-surface);
+  --color-destructive: var(--ck-destructive);
+  --color-success: var(--ck-success, #22c55e);
+  --color-warning: var(--ck-warning, #f59e0b);
+  --color-primary-foreground: var(--ck-primary-foreground, #ffffff);
+  --color-secondary: var(--ck-secondary, #f5f5f5);
+  --color-secondary-foreground: var(--ck-secondary-foreground, #0a0a0a);
+  --color-accent: var(--ck-accent, #f5f5f5);
+  --color-accent-foreground: var(--ck-accent-foreground, #0a0a0a);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Light mode (default) ──────────────────────────────────── */
+:root {
+  --ck-background: #ffffff;
+  --ck-foreground: #0a0a0a;
+  --ck-muted: #f5f5f5;
+  --ck-muted-foreground: #737373;
+  --ck-border: #e5e5e5;
+  --ck-primary: #2563eb;
+  --ck-primary-hover: #1d4ed8;
+  --ck-primary-light: #dbeafe;
+  --ck-surface: #f5f5f5;
+  --ck-destructive: #ef4444;
+  --ck-primary-foreground: #ffffff;
+  --ck-secondary: #f5f5f5;
+  --ck-secondary-foreground: #0a0a0a;
+  --ck-accent: #f5f5f5;
+  --ck-accent-foreground: #0a0a0a;
+  --ck-success: #22c55e;
+  --ck-warning: #f59e0b;
+}
+
+/* ── Dark mode ─────────────────────────────────────────────── */
+.dark {
+  --ck-background: #0a0a0a;
+  --ck-foreground: #fafafa;
+  --ck-muted: #1a1a1a;
+  --ck-muted-foreground: #a3a3a3;
+  --ck-border: #2a2a2a;
+  --ck-primary: #3b82f6;
+  --ck-primary-hover: #60a5fa;
+  --ck-primary-light: #1e3a5f;
+  --ck-surface: #1a1a1a;
+  --ck-destructive: #f87171;
+  --ck-primary-foreground: #0a0a0a;
+  --ck-secondary: #1a1a1a;
+  --ck-secondary-foreground: #fafafa;
+  --ck-accent: #1a1a1a;
+  --ck-accent-foreground: #fafafa;
+  --ck-success: #4ade80;
+  --ck-warning: #fbbf24;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* ── Custom scrollbar ──────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted-foreground);
+}
+
+/* ── Focus ring utility ────────────────────────────────────── */
+.focus-ring {
+  @apply outline-none ring-2 ring-primary/50 ring-offset-2 ring-offset-background;
+}
+
+/* ── Animations for Dialog/Select (from tw-animate-css) ───── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes zoomIn95 {
+  from { transform: scale(0.95); }
+  to { transform: scale(1); }
+}
+@keyframes zoomOut95 {
+  from { transform: scale(1); }
+  to { transform: scale(0.95); }
+}
+@keyframes slideInFromTop {
+  from { transform: translateY(-8px); }
+  to { transform: translateY(0); }
+}
+@keyframes slideInFromBottom {
+  from { transform: translateY(8px); }
+  to { transform: translateY(0); }
+}
+
+.animate-in {
+  animation: fadeIn 200ms ease-out;
+}
+.animate-out {
+  animation: fadeOut 150ms ease-in;
+}
+.zoom-in-95 {
+  animation: zoomIn95 200ms ease-out;
+}
+.zoom-out-95 {
+  animation: zoomOut95 150ms ease-in;
+}
+.slide-in-from-top-2 {
+  animation: slideInFromTop 200ms ease-out;
+}
+.slide-in-from-bottom-2 {
+  animation: slideInFromBottom 200ms ease-out;
+}
+
+/* ── Accordion animations ──────────────────────────────────── */
+@keyframes accordionDown {
+  from { height: 0; opacity: 0; }
+  to { height: var(--radix-accordion-content-height); opacity: 1; }
+}
+@keyframes accordionUp {
+  from { height: var(--radix-accordion-content-height); opacity: 1; }
+  to { height: 0; opacity: 0; }
+}
+.animate-accordion-down {
+  animation: accordionDown 200ms ease-out;
+}
+.animate-accordion-up {
+  animation: accordionUp 200ms ease-out;
+}
+
+/* ── Indeterminate progress animation ──────────────────────── */
+@keyframes indeterminate {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(400%); }
+}
+
+/* ── Sonner toast theming ──────────────────────────────────── */
+[data-sonner-toaster] {
+  --normal-bg: var(--color-background);
+  --normal-border: var(--color-border);
+  --normal-text: var(--color-foreground);
+  --success-bg: color-mix(in srgb, var(--color-success) 10%, var(--color-background));
+  --success-border: color-mix(in srgb, var(--color-success) 30%, var(--color-border));
+  --success-text: var(--color-success);
+  --error-bg: color-mix(in srgb, var(--color-destructive) 10%, var(--color-background));
+  --error-border: color-mix(in srgb, var(--color-destructive) 30%, var(--color-border));
+  --error-text: var(--color-destructive);
+}
+
