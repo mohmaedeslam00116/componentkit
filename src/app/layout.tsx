@@ -13,10 +13,35 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const SITE_URL = "https://mohmaedeslam00116.github.io/componentkit";
+
 export const metadata: Metadata = {
   title: "ComponentKit — Beautiful UI Components",
   description:
     "A collection of 50+ accessible, customizable UI components. Copy-paste into your Next.js, React, or HTML project in seconds.",
+  metadataBase: new URL(SITE_URL),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "ComponentKit — Beautiful UI Components",
+    description:
+      "A collection of 50+ accessible, customizable UI components. Copy-paste into your Next.js, React, or HTML project in seconds.",
+    url: SITE_URL,
+    siteName: "ComponentKit",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ComponentKit — Beautiful UI Components",
+    description:
+      "A collection of 50+ accessible, customizable UI components. Copy-paste into your Next.js, React, or HTML project in seconds.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

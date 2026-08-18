@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mohmaedeslam00116.github.io/componentkit/sitemap.xml
