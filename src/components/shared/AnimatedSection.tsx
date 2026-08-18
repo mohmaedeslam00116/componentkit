@@ -2,6 +2,7 @@
 
 import { useInView } from "@/hooks/useInView";
 import { cn } from "@/lib/utils";
+import { useState, useEffect } from "react";
 
 interface AnimatedSectionProps {
   children: React.ReactNode;
@@ -11,6 +12,11 @@ interface AnimatedSectionProps {
 
 export function AnimatedSection({ children, className, delay }: AnimatedSectionProps) {
   const { ref, inView } = useInView();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <div
@@ -18,9 +24,9 @@ export function AnimatedSection({ children, className, delay }: AnimatedSectionP
       className={cn(
         "transition-all duration-700 ease-out",
         delay,
-        inView
-          ? "opacity-100 translate-y-0"
-          : "opacity-0 translate-y-8",
+        mounted && !inView && "opacity-0 translate-y-8",
+        mounted && inView && "opacity-100 translate-y-0",
+        !mounted && "opacity-100 translate-y-0",
         className
       )}
     >
