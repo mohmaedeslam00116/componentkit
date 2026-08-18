@@ -42,8 +42,9 @@ export function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            aria-label="View source on GitHub"
           >
-            <Code className="h-4 w-4" />
+            <Code className="h-4 w-4" aria-hidden="true" />
           </a>
           <ThemeToggle className="ml-1" />
           <a
@@ -76,7 +77,7 @@ export function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="block rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="block rounded-md px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
               onClick={() => setMobileOpen(false)}
             >
               {link.label}
